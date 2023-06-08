@@ -247,3 +247,12 @@ def main():
                                             mavi_yaka1.get_maas() * (1 + mavi_yaka1.zam_hakki()/100), mavi_yaka2.get_maas() * (1 + mavi_yaka2.zam_hakki()/100), mavi_yaka3.get_maas() * (1 + mavi_yaka3.zam_hakki()/100),
                                             beyaz_yaka1.get_maas() + beyaz_yaka1.zam_hakki(), beyaz_yaka2.get_maas() + beyaz_yaka2.zam_hakki(), beyaz_yaka3.get_maas() + beyaz_yaka3.zam_hakki()]})
     print(df)
+    print(df[["çalışan", "tecrübe", "yeni_maaş"]].groupby("çalışan").mean()[["tecrübe", "yeni_maaş"]])
+    print("yeni_maaş > 15000 : ", df[df["yeni_maaş"] > 15000].count()["yeni_maaş"])
+    print(df.sort_values(by="yeni_maaş"))
+    print(df[(df["tecrübe"] > 3) &  (df["çalışan"] == "beyaz_yaka")])
+    print(df[df["yeni_maaş"] > 10000].iloc[1:5, [1, 12]])
+    print(df[["ad", "soyad", "sektör", "yeni_maaş"]])
+
+if __name__ == "__main__":
+    main()
