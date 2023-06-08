@@ -119,3 +119,38 @@ class Calisan(Insan):
 
     def __str__(self):
         return f"{super().__str__()}\nSektör: {self.__sektor}\nTecrübe: {self.__tecrube}\nYeni Maaş: {self.__maas * (1 + self.zam_hakki()/100)}"
+    
+"""Mavi yaka sınıfı için (MaviYaka.py) yıpranma payı (float: 0.2, 0.5 gibi değer almalıdır) değişkeni private olarak bulunmalıdır.
+• Değişkenlere göre Initializer metot olmalıdır.
+• Tüm gerekli değişkenler için get/set metotları tanımlanmalıdır.
+• Çalışanın zam hakkını hesaplayan zam_hakki metodu yazılacaktır (2 sene öncesi tecrübesi olanın zam oranı önerisi “yıpranma_payi*10” olacaktır. 2-4 sene arası çalışan ise ve maaş 15000TL altıysa “(maaş%tecrübe)/2 + (yıpranma_payi*10)” sonucu zam oranı önerilecektir. 4 seneden fazla tecrübe varsa ve maaş 25000 altıysa “(maaş%tecrübe)/3+ (yıpranma_payi*10)” zam oranı önerilecektir). Yeni maaş, eski maaş ile aynıysa eski maaş, yeni maaşa atanmalıdır.
+• İlgili yerlerde try/except kullanılmalıdır.
+• __str__ metotunda ad, soyad, tecrübe ve yeni maaşı (public değişken ile yazdırılmamalı) yazılmalıdır."""
+
+class MaviYaka(Calisan):
+    def __init__(self, tc_no, ad, soyad, yas, cinsiyet, uyruk, sektor, tecrube, maas, yipr_payi):
+        super().__init__(tc_no, ad, soyad, yas, cinsiyet, uyruk, sektor, tecrube, maas)
+        self.__yipr_payi = yipr_payi
+
+    def set_yipr_payi(self, yipr_payi):
+        self.__yipr_payi = yipr_payi
+
+    def get_yipr_payi(self):
+        return self.__yipr_payi
+
+    def zam_hakki(self):
+        try:
+            if self.get_tecrube() < 24:
+                return self.__yipr_payi * 10
+            elif self.get_tecrube() >= 24 and self.get_tecrube() <= 48 and self.get_maas() < 15000:
+                return (self.get_maas() % self.get_tecrube()) / 2 + self.__yipr_payi * 10
+            elif self.get_tecrube() > 48 and self.get_maas() < 25000:
+                return (self.get_maas() % self.get_tecrube()) / 3 + self.__yipr_payi * 10
+            else:
+                return 0
+        except:
+            print("Bir hata oluştu!")
+
+
+
+
