@@ -45,7 +45,7 @@ class Insan:
 
     def __str__(self):
         return f"TC No: {self.__tc_no}\nAd: {self.__ad}\nSoyad: {self.__soyad}\nYaş: {self.__yas}\nCinsiyet: {self.__cinsiyet}\nUyruk: {self.__uyruk}"
-    
+
 class Issiz(Insan):
     def __init__(self, tc_no, ad, soyad, yas, cinsiyet, uyruk, tecrube):
         super().__init__(tc_no, ad, soyad, yas, cinsiyet, uyruk)
@@ -78,7 +78,7 @@ class Issiz(Insan):
 
     def __str__(self):
         return f"{super().__str__()}\nStatü: {self.__status}"
-    
+
 class Calisan(Insan):
     def __init__(self, tc_no, ad, soyad, yas, cinsiyet, uyruk, sektor, tecrube, maas):
         super().__init__(tc_no, ad, soyad, yas, cinsiyet, uyruk)
@@ -119,13 +119,6 @@ class Calisan(Insan):
 
     def __str__(self):
         return f"Ad: {self.get_ad()}\nSoyad: {self.get_soyad()}\nTecrübe: {self.__tecrube}\nYeni Maaş: {self.__maas * (1 + self.zam_hakki()/100)}"
-    
-"""Mavi yaka sınıfı için (MaviYaka.py) yıpranma payı (float: 0.2, 0.5 gibi değer almalıdır) değişkeni private olarak bulunmalıdır.
-• Değişkenlere göre Initializer metot olmalıdır.
-• Tüm gerekli değişkenler için get/set metotları tanımlanmalıdır.
-• Çalışanın zam hakkını hesaplayan zam_hakki metodu yazılacaktır (2 sene öncesi tecrübesi olanın zam oranı önerisi “yıpranma_payi*10” olacaktır. 2-4 sene arası çalışan ise ve maaş 15000TL altıysa “(maaş%tecrübe)/2 + (yıpranma_payi*10)” sonucu zam oranı önerilecektir. 4 seneden fazla tecrübe varsa ve maaş 25000 altıysa “(maaş%tecrübe)/3+ (yıpranma_payi*10)” zam oranı önerilecektir). Yeni maaş, eski maaş ile aynıysa eski maaş, yeni maaşa atanmalıdır.
-• İlgili yerlerde try/except kullanılmalıdır.
-• __str__ metotunda ad, soyad, tecrübe ve yeni maaşı (public değişken ile yazdırılmamalı) yazılmalıdır."""
 
 class MaviYaka(Calisan):
     def __init__(self, tc_no, ad, soyad, yas, cinsiyet, uyruk, sektor, tecrube, maas, yipr_payi):
@@ -150,9 +143,6 @@ class MaviYaka(Calisan):
                 return 0
         except:
             print("Bir hata oluştu!")
-
-
-
 
 class BeyazYaka(Calisan):
     def __init__(self, tc_no, ad, soyad, yas, cinsiyet, uyruk, sektor, tecrube, maas, tesvik_primi):
@@ -182,4 +172,37 @@ class BeyazYaka(Calisan):
     def __str__(self):
         return f"Ad: {self.get_ad()}\nSoyad: {self.get_soyad()}\nTecrübe: {self.__tecrube}\nYeni Maaş: {self.__maas + self.zam_hakki()}"
 
+def manin():
+    insan1 = Insan("1", "insan1ad", "insan1soyad", 20, "erkek", "tr")
+    insan2 = Insan("2", "insan2ad", "insan2soyad", 21, "kadın", "tr")
+    print(insan1)
+    print(insan2)
+
+    issiz1 = Issiz("3", "issiz1ad", "issiz1soyad", 22, "erkek", "tr", {"mavi_yaka":2, "yonetici":1, "beyaz_yaka":1})
+    issiz2 = Issiz("4", "issiz2ad", "issiz2soyad", 23, "kadın", "tr", {"mavi_yaka":10, "yonetici":5, "beyaz_yaka":7})
+    issiz3 = Issiz("5", "issiz3ad", "issiz3soyad", 24, "erkek", "tr", {"mavi_yaka":5, "yonetici":2, "beyaz_yaka":3})
+    print(issiz1)
+    print(issiz2)
+    print(issiz3)
+
+    calisan1 = Calisan("6", "calisan1ad", "calisan1soyad", 25, "erkek", "tr", "teknoloji", 10, 10000)
+    calisan2 = Calisan("7", "calisan2ad", "calisan2soyad", 26, "kadın", "tr", "muhasebe", 30, 14000)
+    calisan3 = Calisan("8", "calisan3ad", "calisan3soyad", 27, "erkek", "tr", "inşaat", 50, 24000)
+    print(calisan1)
+    print(calisan2)
+    print(calisan3)
+
+    mavi_yaka1 = MaviYaka("9", "mavi_yaka1ad", "mavi_yaka1soyad", 28, "erkek", "tr", "teknoloji", 10, 10000, 0.5)
+    mavi_yaka2 = MaviYaka("10", "mavi_yaka2ad", "mavi_yaka2soyad", 29, "kadın", "tr", "muhasebe", 30, 14000, 0.1)
+    mavi_yaka3 = MaviYaka("11", "mavi_yaka3ad", "mavi_yaka3soyad", 30, "erkek", "tr", "inşaat", 50, 24000, 0.2)
+    print(mavi_yaka1)
+    print(mavi_yaka2)
+    print(mavi_yaka3)
+
+    beyaz_yaka1 = BeyazYaka("12", "beyaz_yaka1ad", "beyaz_yaka1soyad", 31, "erkek", "tr", "teknoloji", 10, 10000, 1500)
+    beyaz_yaka2 = BeyazYaka("13", "beyaz_yaka2ad", "beyaz_yaka2soyad", 32, "kadın", "tr", "muhasebe", 30, 14000, 2000)
+    beyaz_yaka3 = BeyazYaka("14", "beyaz_yaka3ad", "beyaz_yaka3soyad", 33, "erkek", "tr", "inşaat", 50, 24000, 2500)
+    print(beyaz_yaka1)
+    print(beyaz_yaka2)
+    print(beyaz_yaka3)
 
