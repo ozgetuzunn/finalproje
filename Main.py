@@ -170,9 +170,10 @@ class BeyazYaka(Calisan):
 
 
     def __str__(self):
-        return f"Ad: {self.get_ad()}\nSoyad: {self.get_soyad()}\nTecrübe: {self.__tecrube}\nYeni Maaş: {self.__maas + self.zam_hakki()}"
+        return f"Ad: {self.get_ad()}\nSoyad: {self.get_soyad()}\nTecrübe: {self.get_tecrube()}\nYeni Maaş: {self.get_maas() + self.zam_hakki()}"
 
-def manin():
+import pandas as pd
+def main():
     insan1 = Insan("1", "insan1ad", "insan1soyad", 20, "erkek", "tr")
     insan2 = Insan("2", "insan2ad", "insan2soyad", 21, "kadın", "tr")
     print(insan1)
@@ -206,3 +207,43 @@ def manin():
     print(beyaz_yaka2)
     print(beyaz_yaka3)
 
+    df = pd.DataFrame({"çalışan": ["calisan", "calisan", "calisan", 
+                                   "mavi_yaka", "mavi_yaka", "mavi_yaka", 
+                                   "beyaz_yaka", "beyaz_yaka", "beyaz_yaka"],
+                          "tc_no": ["6", "7", "8", 
+                                    "9", "10", "11", 
+                                    "12", "13", "14"],
+                            "ad": ["calisan1ad", "calisan2ad", "calisan3ad",
+                                   "mavi_yaka1ad", "mavi_yaka2ad", "mavi_yaka3ad",
+                                   "beyaz_yaka1ad", "beyaz_yaka2ad", "beyaz_yaka3ad"],
+                            "soyad": ["calisan1soyad", "calisan2soyad", "calisan3soyad",
+                                    "mavi_yaka1soyad", "mavi_yaka2soyad", "mavi_yaka3soyad",
+                                    "beyaz_yaka1ad", "beyaz_yaka2ad", "beyaz_yaka3ad"],
+                            "yas": [25, 26, 27,
+                                    28, 29, 30,
+                                    31, 32, 33],
+                            "cinsiyet": ["erkek", "kadın", "erkek",
+                                        "erkek", "kadın", "erkek",
+                                        "erkek", "kadın", "erkek"],
+                            "uyruk": ["tr", "tr", "tr",
+                                    "tr", "tr", "tr",
+                                    "tr", "tr", "tr"],
+                            "sektör": ["teknoloji", "muhasebe", "inşaat",
+                                    "teknoloji", "muhasebe", "inşaat",
+                                    "teknoloji", "muhasebe", "inşaat"],
+                            "tecrübe": [10/12, 30/12, 50/12,
+                                        10/12, 30/12, 50/12,
+                                        10/12, 30/12, 50/12],
+                            "maaş": [10000, 14000, 24000,
+                                    10000, 14000, 24000,
+                                    10000, 14000, 24000],
+                            "yıpranma_payı": [0, 0, 0,
+                                            0.5, 0.1, 0.2,
+                                            0, 0, 0],
+                            "teşvik_primi": [0, 0, 0,
+                                            0, 0, 0,
+                                            1500, 2000, 2500],
+                            "yeni_maaş": [calisan1.get_maas() * (1 + calisan1.zam_hakki()/100), calisan2.get_maas() * (1 + calisan2.zam_hakki()/100), calisan3.get_maas() * (1 + calisan3.zam_hakki()/100),
+                                            mavi_yaka1.get_maas() * (1 + mavi_yaka1.zam_hakki()/100), mavi_yaka2.get_maas() * (1 + mavi_yaka2.zam_hakki()/100), mavi_yaka3.get_maas() * (1 + mavi_yaka3.zam_hakki()/100),
+                                            beyaz_yaka1.get_maas() + beyaz_yaka1.zam_hakki(), beyaz_yaka2.get_maas() + beyaz_yaka2.zam_hakki(), beyaz_yaka3.get_maas() + beyaz_yaka3.zam_hakki()]})
+    print(df)
