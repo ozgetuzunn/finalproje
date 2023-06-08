@@ -52,11 +52,12 @@ class Issiz(Insan):
         self.__tecrube = tecrube
         self.__status = self.statu_bul()
 
-    def set_status(self, status):
-        self.__status = status
+    def set_tecrube(self, t):
+        self.__tecrube = t
+        self.statu_bul()
 
-    def get_status(self):
-        return self.__status
+    def get_tecrube(self):
+        return self.__tecrube
 
     def statu_bul(self):
         try:
@@ -77,3 +78,4 @@ class Issiz(Insan):
 
     def __str__(self):
         return f"{super().__str__()}\nStatü: {self.__status}"
+    
